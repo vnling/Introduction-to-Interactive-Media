@@ -14,7 +14,7 @@ Even though both these resources are geared towards p5.js rather than Processing
 
 I began by trying to figure out a basic face shape for the portrait, using the three functions mentioned above. This is the result:
 
-![]{progress1.png)
+![](progress1.png)
 
 After getting that down, I moved to drawing the shape of the hair. I later moved the chunk of code drawing the hair above the one drawing the face (order matters!) and added colors for both.
 
