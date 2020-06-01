@@ -9,6 +9,6 @@ I also experimented with a second project, which randomly rotated squares drawn 
 
 ![](june2.3.JPG)
 
-##### Challenges
+### Challenges
 
 Since randomness was a major feature in this project, one challenge I encountered was balancing the randomness of the program with the outcome I wanted to generate. Since this is something we explore in a later class as well, I'm excited to see how this can translate beyond the computer screen!
