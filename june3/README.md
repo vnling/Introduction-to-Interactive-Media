@@ -5,11 +5,11 @@ For this assignment, I decided to create a mosaic of multicoloured squares that 
 I began with a slightly modified version of the ball exercise we have been doing in class, creating a mosaic of circles and 
 simply not wiping the screen after each draw() iteration. The results were quite interesting.
 
-![](june3.jpg)
+![](june3.JPG)
 
 Eventually, I was able to achieve the results I wanted. The screenshot below was taken halfway through the program's execution.
 
-![](june3_final.jpg)
+![](june3_final.JPG)
 
 ### Challenges and Observations
 
