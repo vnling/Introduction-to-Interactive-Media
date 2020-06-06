@@ -4,7 +4,7 @@ A "bubble plot" from randomly generated data laid over an image of Bubbles, the 
 
 <img src="june7.3.JPG" width="500">
 
-The bubbles' x and y positions determined by the first and second integers in each set, and the radius determined by the third integer divided by 10. The opacity of each bubble is a function of the width and height, meaning that the bubbles are the most opaque in the top left corner and most transparent in the bottom right.
+For this project, I researched image loading and resizing. The bubbles' x and y positions are determined by the first and second integers in each set, and the radius is determined by the third integer divided by 10. The opacity of each bubble is a function of the width and height, meaning that the bubbles are the most opaque in the top left corner and most transparent in the bottom right. I also added an if() condition to ensure that the bubbles would not overlap the character's face.
 
 # Artwork with Transformations Project
 
@@ -22,4 +22,4 @@ I also experimented with dynamic versions of my artwork, drawing the squares in 
 
 ### Challenges 
 
-Something I found quite frustrating while completing the data visualization project was Processing's lack of functionality in terms of data cleaning and preprocessing. I had initially conceptualized a more technical and "statistics-y" project, but found myself unable to carry it out because of the absence of functions like max() and Processing's limited functionality for dealing with empty data values and differing data types. 
+Something I found quite frustrating while completing the data visualization project was Processing's lack of functionality in terms of data cleaning and preprocessing. I had initially conceptualized a more technical and "statistics-y" project, but found myself unable to carry it out because of the absence of functions like max() and Processing's limited functionality for dealing with empty data values and differing data types. Processing also crashed when I tried to load large datasets, which limited the types of datasets I could work with. This meant that I eventually had to scale down many of my expectations.
