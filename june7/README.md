@@ -18,7 +18,7 @@ My version is a grid of squares with the rotation factor increasing as you go fr
 
 I also experimented with dynamic versions of my artwork, drawing the squares in the draw() function rather than the setup(). This yielded some interesting results as well:
 
-![](june7.1.JPG)
+![](june_7.1.JPG)
 
 ### Challenges 
 
