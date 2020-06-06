@@ -2,7 +2,7 @@
 
 A "bubble plot" from randomly generated data laid over an image of Bubbles, the Powerpuff Girl, to create a static artwork. (For clarity, "bubbles" hereon refers to the circles of the bubble plot, while "the character" refers to the cartoon character.) The data input was 250 sets of 3 integers per set. 
 
-![](june7.3.JPG)
+![]<img src="june7.3.JPG" width="400">
 
 The bubbles' x and y positions determined by the first and second integers in each set, and the radius determined by the third integer divided by 10. The opacity of each bubble is a function of the width and height, meaning that the bubbles are the most opaque in the top left corner and most transparent in the bottom right.
 
