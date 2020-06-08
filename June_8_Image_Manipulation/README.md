@@ -10,8 +10,8 @@ I chose to make my pixel "groups" 11x11 squares, selecting the 6th pixel from th
 
 By switching around the rgb values of each pixel, I was also able to produce the following images. The color effects were inspired by Andy Warhol's Marilyn Diptych. 
 
-<img src="june8.2.JPG" width="400"><img src="june8.3.JPG" width="400">
-<img src="june8.4.JPG" width="400"><img src="june8.5.JPG" width="400">
+<img src="june8.2.JPG" width="400"><img src="june8.5.JPG" width="400">
+<img src="june8.4.JPG" width="400"><img src="june8.3.JPG" width="400">
 
 ### Challenges
 
