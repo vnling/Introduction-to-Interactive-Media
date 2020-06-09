@@ -12,8 +12,21 @@ class Ghost {
   }
 
   void drawGhost() {
-    fill(255);
-    circle(xPos, yPos, 50);
+    if (xVel > 0) {
+      image(ghostR, xPos, yPos, 40, 40);
+    }
+    else if (xVel < 0) {
+      image(ghostL, xPos, yPos, 40, 40);
+    }
+    else if (yVel > 0) {
+      image(ghostD, xPos, yPos, 40, 40);
+    }
+    else if (yVel < 0) {
+      image(ghostU, xPos, yPos, 40, 40);
+    }
+    else {
+      image(ghostR, xPos, yPos, 40, 40);
+    }
   }
 
   void ghostMoves() {

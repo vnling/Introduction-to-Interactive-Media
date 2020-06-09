@@ -12,8 +12,61 @@ class Pacman {
   }
 
   void drawPacman() {
-    fill(255, 0, 0);
-    circle(xPos, yPos, 50);
+    if (xVel > 0) {
+      if (frameCount%12 < 4) {
+        image(pacman1, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+        image(pacman2, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 8) {
+        image(pacman3, xPos, yPos, 40, 40);
+      }
+    }
+    else if (xVel < 0) {
+      if (frameCount%12 < 4) {
+        image(pacman7, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+        image(pacman8, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 8) {
+        image(pacman9, xPos, yPos, 40, 40);
+      }
+    }
+    else if (yVel > 0) {
+      if (frameCount%12 < 4) {
+        image(pacman4, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+        image(pacman5, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 8) {
+        image(pacman6, xPos, yPos, 40, 40);
+      }
+    }
+    else if (yVel < 0) {
+      if (frameCount%12 < 4) {
+        image(pacman10, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+        image(pacman11, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 8) {
+        image(pacman12, xPos, yPos, 40, 40);
+      }
+    }
+    else {
+      if (frameCount%12 < 4) {
+        image(pacman1, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+        image(pacman2, xPos, yPos, 40, 40);
+      }
+      else if (frameCount%12 >= 8) {
+        image(pacman3, xPos, yPos, 40, 40);
+      }
+    }
   }
 
   void pacmanMoves() {

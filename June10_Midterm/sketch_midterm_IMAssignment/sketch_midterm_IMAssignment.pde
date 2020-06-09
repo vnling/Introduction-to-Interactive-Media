@@ -1,16 +1,30 @@
-final int GRID_SIZE = 50;
-final int CELLS_PER_ROW = 16;
-int LIVES = 10000;
+final int GRID_SIZE = 40;
+final int CELLS_PER_ROW = 20;
+PImage ghostR;
+PImage ghostL;
+PImage ghostD;
+PImage ghostU;
+PImage pacman1;
+PImage pacman2;
+PImage pacman3;
+PImage pacman4;
+PImage pacman5;
+PImage pacman6;
+PImage pacman7;
+PImage pacman8;
+PImage pacman9;
+PImage pacman10;
+PImage pacman11;
+PImage pacman12;
+
+int LIVES = 3;
 int SCORE = 0;
 Pacman pacman = new Pacman(50, 60);
 Ghost[] ghosts = new Ghost[4];
 Food[][] food = new Food[CELLS_PER_ROW][CELLS_PER_ROW];
 
-//load images
-//load sounds
-
 void setup() {
-  size(800, 820);
+  size(800, 850);
   for (int i = 0; i < ghosts.length; i++) {
     ghosts[i] = new Ghost(random(width), random(height));
   }
@@ -20,14 +34,35 @@ void setup() {
       food[i][j] = new Food(i, j);
     }
   }
+  
+  ghostR = loadImage("ghostR.png");
+  ghostL = loadImage("ghostL.png");
+  ghostD = loadImage("ghostD.png");
+  ghostU = loadImage("ghostU.png");
+  pacman1 = loadImage("pacman1.png");
+  pacman2 = loadImage("pacman2.png");
+  pacman3 = loadImage("pacman3.png");
+  pacman4 = loadImage("pacman4.png");
+  pacman5 = loadImage("pacman5.png");
+  pacman6 = loadImage("pacman6.png");
+  pacman7 = loadImage("pacman7.png");
+  pacman8 = loadImage("pacman8.png");
+  pacman9 = loadImage("pacman9.png");
+  pacman10 = loadImage("pacman10.png");
+  pacman11 = loadImage("pacman11.png");
+  pacman12 = loadImage("pacman12.png");
+  
+  PFont font;
+  font = createFont("Bauhaus 93", 50);
+  textFont(font);
 }
 
 void draw() {
   background(0); 
   
-  textSize(15);
-  text("Lives: " + LIVES, 20, 805);
-  text("Score: " + SCORE, 400, 805);
+  textSize(40);
+  text("Lives: " + LIVES, 20, 830);
+  text("Score: " + SCORE, 400, 830);
   
   
   for (int i = 0; i < CELLS_PER_ROW; i++) { //drawing food
@@ -57,24 +92,22 @@ void draw() {
   }
   
   if (LIVES <= 0) { //checking lose condition
-    pacman.xVel = 0;
-    pacman.yVel = 0;
-    for (int i = 0; i < ghosts.length; i++) {
-      ghosts[i].xVel = 0;
-      ghosts[i].yVel = 0;
-    }
     background(0);
     textSize(50);
     fill(255);
-    text("LOSER", 50, 50);
+    text("YOU LOST", 300, 300);
+    text("BETTER LUCK NEXT TIME!", 130, 400);
     LIVES = 0;
+    ghosts[0].drawGhost();
   }
   
   if (checkWin()) { //checking win condition
     background(0);
+    ghosts[0].drawGhost();
     textSize(50);
     fill(255);
-    text("YOU WON WHEEEE", 50, 50);
+    text("CONGRATULATIONS!", 150, 300);
+    text("YOU BEAT THE GHOSTS", 130, 400);
   }
 
 }

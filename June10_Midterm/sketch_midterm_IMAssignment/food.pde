@@ -11,12 +11,14 @@ class Food {
   
   void drawFood() {
     if (!eaten) {
-      circle(xPos, yPos, 3);
+      circle(xPos, yPos, 4);
     }
   }
 
   void checkEaten(int i, int j) {
-    if (dist(pacman.xPos, pacman.yPos, food[i][j].xPos, food[i][j].yPos) < 23) {
+    if (dist(pacman.xPos, pacman.yPos, food[i][j].xPos, food[i][j].yPos) <= 41 && 
+      food[i][j].xPos > pacman.xPos && food[i][j].yPos > pacman.yPos) 
+    {
       food[i][j].eaten = true;
     }
      
