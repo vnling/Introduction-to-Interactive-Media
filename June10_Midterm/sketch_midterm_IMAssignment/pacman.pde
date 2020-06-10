@@ -4,6 +4,7 @@ class Pacman {
   float xVel;
   float yVel;
 
+  //pacman initialized with given position and no movement
   Pacman(float x, float y) {
     xPos = x;
     yPos = y;
@@ -11,6 +12,8 @@ class Pacman {
     yVel = 0;
   }
 
+  //drawing pacman, outer if condition determines the direction pacman is going in
+  //inner if condition allows for animation based on the framecount
   void drawPacman() {
     if (xVel > 0) {
       if (frameCount%12 < 4) {
@@ -69,15 +72,18 @@ class Pacman {
     }
   }
 
+  //pacman bounces off the edge of the frame
   void pacmanMoves() {
-    if (xPos <= 0 || xPos >= 800 || yPos <= 0 || yPos >= 800) {
+    if (xPos <= 0 || xPos >= 760 || yPos <= 0 || yPos >= 760) {
       xVel = -xVel;
       yVel = -yVel;
     }
+    //otherwise just move pacman as normal
     xPos += xVel;
     yPos += yVel;
   }
   
+  //pacman changes direction based on key input (from keyPressed())
   void pacmanChangeDirection(String direction) {
     switch(direction) {
       case "up":
