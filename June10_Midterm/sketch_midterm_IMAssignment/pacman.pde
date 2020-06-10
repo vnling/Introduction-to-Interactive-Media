@@ -76,11 +76,9 @@ class Pacman {
   void pacmanMoves() {
     if (xPos <= 0 || xPos >= 760) {
       xVel = -xVel;
-      println("PACMAN BOUNCED " + xPos + " " + yPos + " " + xVel + " " + yVel);
     }
     if (yPos <= 0 || yPos >= 760) {
       yVel = -yVel;
-      println("PACMAN BOUNCED " + xPos + " " + yPos + " " + xVel + " " + yVel);
     }
     //otherwise just move pacman as normal
     xPos += xVel;
