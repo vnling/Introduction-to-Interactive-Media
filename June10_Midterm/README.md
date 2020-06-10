@@ -18,7 +18,7 @@ I was able to "animate" Pac-Man's movement by loading in different images based 
 
 At the end of the game (when the player has either eaten all the food or lost all their lives), one of two screens shows up: 
 
-<img src="june10.3.gif" width="400"><img src="june10.4.gif" width="400">
+<img src="june10.5.gif" width="400">  <img src="june10.4.gif" width="400">
 
 The ghost left on-screen is a deliberate feature to add movement and interest to the ending screens.
 
@@ -28,6 +28,6 @@ The sound library could not process the .mp3 file I uploaded. This turned out to
 
 I also occasionally faced a scenario where one of my sprites would simply hit the edge of the frame and get stuck there, not bouncing back like they were programmed to. I am still unclear as to what might be causing this, though I can create it by changing directions when Pac-Man hits the edge of the screen. 
 
-<img src="june10.5.gif" width="500">
+<img src="june10.3.gif" width="500">
 
 Another aspect of the program that I would like to fix is the fact that the ghosts occasionally instantiate very near Pac-Man, and "collide" with Pac-Man by bouncing off the walls right next to it, leaving the player to start the game with only a single life. I might consider making Pac-Man "immune" in its starting position, to prevent this from happening in the future.
