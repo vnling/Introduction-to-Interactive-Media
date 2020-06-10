@@ -26,8 +26,8 @@ The ghost left on-screen is a deliberate feature to add movement and interest to
 
 The sound library could not process the .mp3 file I uploaded. This turned out to be a fairly easy fix however, since I was able to use another library, minim, to load the soundtrack I wanted.
 
-I also occasionally faced a scenario where one of my sprites would simply hit the edge of the frame and get stuck there, not bouncing back like they were programmed to. I am still unclear as to what might be causing this, though I can create it by changing directions when Pac-Man hits the edge of the screen. 
+I also occasionally faced a scenario where one of my sprites would simply hit the edge of the frame and get stuck there, not bouncing back like they were programmed to. I was able to fix this by making the reversal of the sprites' x- and y-velocities separate (rather than reversing both in a single if() condition), and disallowing sprites from changing directions if they were within 5 pixels of the edge of the frame.
 
 <img src="june10.3.gif" width="500">
 
-Another aspect of the program that I would like to fix is the fact that the ghosts occasionally instantiate very near Pac-Man, and "collide" with Pac-Man by bouncing off the walls right next to it, leaving the player to start the game with only a single life. I might consider making Pac-Man "immune" in its starting position, to prevent this from happening in the future.
+Another aspect of the program that I wanted to fix was the fact that the ghosts occasionally instantiate very near Pac-Man, and "collide" with Pac-Man by bouncing off the walls right next to it, leaving the player to start the game with only a single life. I made Pac-Man "immune" in its starting position to prevent this from happening.
