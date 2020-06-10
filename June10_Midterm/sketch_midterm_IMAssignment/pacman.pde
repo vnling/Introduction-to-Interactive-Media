@@ -74,9 +74,13 @@ class Pacman {
 
   //pacman bounces off the edge of the frame
   void pacmanMoves() {
-    if (xPos <= 0 || xPos >= 760 || yPos <= 0 || yPos >= 760) {
+    if (xPos <= 0 || xPos >= 760) {
       xVel = -xVel;
+      println("PACMAN BOUNCED " + xPos + " " + yPos + " " + xVel + " " + yVel);
+    }
+    if (yPos <= 0 || yPos >= 760) {
       yVel = -yVel;
+      println("PACMAN BOUNCED " + xPos + " " + yPos + " " + xVel + " " + yVel);
     }
     //otherwise just move pacman as normal
     xPos += xVel;
@@ -85,24 +89,26 @@ class Pacman {
   
   //pacman changes direction based on key input (from keyPressed())
   void pacmanChangeDirection(String direction) {
+   if (xPos > 5 && xPos < 755 && yPos > 5 && yPos < 755) {
     switch(direction) {
-      case "up":
-        xVel = 0;
-        yVel = -5;
-        break;
-      case "down":
-        xVel = 0;
-        yVel = 5;
-        break;
-      case "left":
-        yVel = 0;
-        xVel = -5;
-        break;
-      case "right":
-        yVel = 0;
-        xVel = 5;
-        break;
+        case "up":
+          xVel = 0;
+          yVel = -5;
+          break;
+        case "down":
+          xVel = 0;
+          yVel = 5;
+          break;
+        case "left":
+          yVel = 0;
+          xVel = -5;
+          break;
+        case "right":
+          yVel = 0;
+          xVel = 5;
+          break;
+        }
+      }
     }
-  }
   
 }

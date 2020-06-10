@@ -134,7 +134,7 @@ void draw() {
   scoring(); //updates score
   
   //checks for collision, instantiates new pacman if yes
-  if (checkCollision()) { 
+  if (checkCollision() && pacman.xPos != 50 && pacman.yPos != 60) { 
     pacman = new Pacman(50, 60);
     LIVES--;
   }

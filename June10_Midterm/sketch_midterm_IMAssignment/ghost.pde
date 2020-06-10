@@ -33,8 +33,10 @@ class Ghost {
 
   //ghosts should bounce off the side of the frame when they hit it
   void ghostMoves() {
-    if (xPos <= 0 || xPos >= 760 || yPos <= 0 || yPos >= 760) {
+    if (xPos <= 0 || xPos >= 760) {
       xVel = -xVel;
+    }
+    if (yPos <= 0 || yPos >= 760) {
       yVel = -yVel;
     }
     //otherwise just keep on going
@@ -45,25 +47,26 @@ class Ghost {
   //change the direction of the ghosts at random
   void ghostChangeDirection() {
     float direction = random(3);
-    switch((int)direction) {
-      case 0:
-        xVel = 0;
-        yVel = -5;
-        break;
-      case 1:
-        xVel = 0;
-        yVel = 5;
-        break;
-      case 2:
-        yVel = 0;
-        xVel = -5;
-        break;
-      case 3:
-        yVel = 0;
-        xVel = 5;
-        break;
+    if (xPos > 5 && xPos < 755 && yPos > 5 && yPos < 755) {
+      switch((int)direction) {
+        case 0:
+          xVel = 0;
+          yVel = -5;
+          break;
+        case 1:
+          xVel = 0;
+          yVel = 5;
+          break;
+        case 2:
+          yVel = 0;
+          xVel = -5;
+          break;
+        case 3:
+          yVel = 0;
+          xVel = 5;
+          break;
+      }
     }
-  
   }
   
 }
