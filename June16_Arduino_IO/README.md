@@ -12,7 +12,7 @@ The schematic of my project is attached below:
 
 As are a couple of photos:
 
-<img src="20200615_231207[1].jpg" width="400"><img src="20200615_231237[1].jpg" width="400">
+<img src="20200615_231207[1].jpg" width="400">   <img src="20200615_231237[1].jpg" width="400">
 
 ### Challenges 
 
