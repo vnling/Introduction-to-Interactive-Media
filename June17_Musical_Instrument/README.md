@@ -10,9 +10,9 @@ I created a modified theremin for this project, using a photoresistor and moment
 
 ### Results
 
-Attached below are photos of my completed project, as well as a link to a video of what I have convinced myself sounds like "Mary had a Little Lamb".
+Attached below are photos of my completed project, as well as a link to a video of what I have convinced myself sounds like "Mary had a Little Lamb" played on my theremin.
 
-<img src="17JuneSchematic[1].jpg" width=400><img src="17JuneSchematic[1].jpg" width=400>
+<img src="20200616_230548[1].jpg.jpg" width=400><img src="20200616_230601[1].jpg" width=400>
 
 ![https://youtu.be/PTmQyF_nmqQ](Video Link)
 
