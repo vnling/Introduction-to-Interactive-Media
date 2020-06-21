@@ -12,6 +12,8 @@ Drawing inspiration from Dan Shiffman's tutorial on the Chrome Dinosaur Game, I 
 
 # Results
 
+<img src = "june21.1.jpg" width = 1000>
+
 <img src = "20200621_154258[1].jpg" width = 700>
 
 # Challenges
