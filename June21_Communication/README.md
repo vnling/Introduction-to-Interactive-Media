@@ -12,7 +12,11 @@ Drawing inspiration from Dan Shiffman's tutorial on the Chrome Dinosaur Game, I 
 
 # Results
 
-<img src = "june21.1.jpg" width = 1000>
+Attached below is a screenshot from the game: 
+
+<img src = "june21.1.JPG" width = 1000>
+
+As well as a picture of my breadboard: 
 
 <img src = "20200621_154258[1].jpg" width = 700>
 
