@@ -4,15 +4,15 @@
 
 Drawing inspiration from Dan Shiffman's tutorial on the Chrome Dinosaur Game, I decided to create my own version featuring Pac-Man as the dinosaur and Blinky as the cacti. Pac-Man jumps over the Blinkies to survive, and scores points for living longer. I used a simple momentary switch as the input for this game: when the switch is pressed (giving an input of 1), Pac-Man jumps. 
 
-[https://www.youtube.com/watch?v=l0HoJHc-63Q&t=826s](Dan Shiffman's Tutorial)
+[Dan Shiffman's Tutorial](https://www.youtube.com/watch?v=l0HoJHc-63Q&t=826s)
 
 # Schematic 
 
-<img src = "21juneschematic[1].jpg" width = 1000>
+<img src = "21juneschematic[1].jpg" width = 700>
 
 # Results
 
-<img src = "20200621_154258[1].jpg" width = 1000>
+<img src = "20200621_154258[1].jpg" width = 700>
 
 # Challenges
 
