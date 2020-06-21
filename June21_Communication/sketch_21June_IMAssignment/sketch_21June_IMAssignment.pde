@@ -28,6 +28,7 @@ void draw() {
   background(0);
   dinosaur.drawDinosaur();
   dinosaur.moveDinosaur();
+  println(dinosaur.ypos);
   
   //setting score to frameCount
   score = frameCount;

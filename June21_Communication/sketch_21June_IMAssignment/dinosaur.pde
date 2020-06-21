@@ -18,7 +18,7 @@ class Dinosaur {
   }
 
   void jumpDinosaur() {
-    if (ypos == 560) {  //had to hard code bc height - size is giving strange results
+    if (ypos >= 410) {  //had to hard code bc height - size is giving strange results
       yvel = -15; //arbitrarily chosen after playing around
     }
   }
