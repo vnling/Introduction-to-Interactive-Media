@@ -14,7 +14,7 @@ Drawing inspiration from Dan Shiffman's tutorial on the Chrome Dinosaur Game, I 
 
 Attached below are a screenshot and a GIF from the game: 
 
-<img src = "june21.1.JPG" width = 400> <img src = "june21.2.gif" width = 400>
+<img src = "june21.1.JPG" width = 400> <img src = "june21.2.gif" width = 480>
 
 As well as a picture of my breadboard: 
 
