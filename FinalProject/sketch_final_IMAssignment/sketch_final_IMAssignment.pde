@@ -39,6 +39,18 @@ PImage ghostR;
 PImage ghostL;
 PImage ghostD;
 PImage ghostU;
+PImage ghost1R;
+PImage ghost1L;
+PImage ghost1D;
+PImage ghost1U;
+PImage ghost2R;
+PImage ghost2L;
+PImage ghost2D;
+PImage ghost2U;
+PImage ghost3R;
+PImage ghost3L;
+PImage ghost3D;
+PImage ghost3U;
 PImage scaredGhost1;
 PImage scaredGhost2;
 PImage scaredGhost3;
@@ -57,39 +69,39 @@ PImage pacman11;
 PImage pacman12;
 
 //setting the number of lives and the player's score as global variables
-int LIVES = 3;
+int LIVES = 3000;
 int SCORE = 0;
 int freezeFrame;
 
 //initializing the pacman, ghost, and food instances
 //pacman is created in the top left corner
-Pacman pacman = new Pacman(50, 60);
-Ghost[] ghosts = new Ghost[4];
-Powerup[] powerup = new Powerup[6];
-Food[][] food = new Food[CELLS_PER_ROW][CELLS_PER_ROW];
+Pacman pacman = new Pacman(4, 4);
+ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
+ArrayList<Powerup> powerup = new ArrayList<Powerup>();
+ArrayList<Food> food = new ArrayList<Food>();
+ArrayList<Wall> walls = new ArrayList<Wall>();
 
 void setup() {
   size(800, 850);
+  frameRate(10);
 
   //playing music
   minim = new Minim(this);
   player = minim.loadFile("pacman.mp3");
   //player.loop();
 
-  //creating ghosts at random positions
-  for (int i = 0; i < ghosts.length; i++) {
-    ghosts[i] = new Ghost(300 + 50*i, 360); //hardcoded start points: now they all start in the middle!
-  }
-
-  //creating powerups
-  for (int i = 0; i < powerup.length; i++) {
-    powerup[i] = new Powerup(random(800), random(800));
-  }
-
-  //creating food, one item per grid square
-  for (int i = 0; i < CELLS_PER_ROW; i++) {
-    for (int j = 0; j < CELLS_PER_ROW; j++) {
-      food[i][j] = new Food(i, j);
+  for (int i = 0; i < BLUEPRINT.length; i++) {
+    for (int j = 0; j < BLUEPRINT[i].length; j++) {
+      //wall
+      if (BLUEPRINT[i][j] == 'W') {
+        walls.add(new Wall(j, i));
+      } else if (BLUEPRINT[i][j] == ' ') {
+        food.add(new Food(j, i));
+      } else if (BLUEPRINT[i][j] == 'P') {
+        powerup.add(new Powerup(j, i));
+      } else if (BLUEPRINT[i][j] == 'G') {
+        ghosts.add(new Ghost(j, i));
+      }
     }
   }
 
@@ -104,6 +116,18 @@ void setup() {
   ghostL = loadImage("ghostL.png");
   ghostD = loadImage("ghostD.png");
   ghostU = loadImage("ghostU.png");
+  ghost1R = loadImage("ghost1R.png");
+  ghost1L = loadImage("ghost1L.png");
+  ghost1D = loadImage("ghost1D.png");
+  ghost1U = loadImage("ghost1U.png");
+  ghost2R = loadImage("ghost2R.png");
+  ghost2L = loadImage("ghost2L.png");
+  ghost2D = loadImage("ghost2D.png");
+  ghost2U = loadImage("ghost2U.png");
+  ghost3R = loadImage("ghost3R.png");
+  ghost3L = loadImage("ghost3L.png");
+  ghost3D = loadImage("ghost3D.png");
+  ghost3U = loadImage("ghost3U.png");
   scaredGhost1 = loadImage("scaredghost1.png");
   scaredGhost2 = loadImage("scaredghost2.png");
   scaredGhost3 = loadImage("scaredghost3.png");
@@ -123,7 +147,7 @@ void setup() {
 
   //loading font
   PFont font;
-  font = createFont("Bauhaus 93", 50);
+  font = createFont("PressStart2P.ttf", 50);
   textFont(font);
 }
 
@@ -132,25 +156,30 @@ void draw() {
   background(0); 
 
   //hub at the bottom displays lives and score
-  textSize(40);
-  text("Lives: " + LIVES, 20, 830);
-  text("Score: " + SCORE, 400, 830);
+  fill(255);
+  textSize(25);
+  text("LIVES: " + LIVES, 20, 840);
+  text("SCORE: " + SCORE, 400, 840);
 
-  for (int i = 0; i < powerup.length; i++) {
-    if (powerup[i].checkEaten(i)) {
-      freezeFrame = makeGhostsVulnerable();
-    }
-    powerup[i].drawPowerup();
+  for (int i = 0; i < walls.size(); i++) {
+    walls.get(i).drawWall();
   }
   
+  //if powerups are eaten make ghosts vulnerable
+  for (int i = 0; i < powerup.size(); i++) {
+    if (powerup.get(i).checkEaten(i)) {
+      freezeFrame = makeGhostsVulnerable();
+    }
+    powerup.get(i).drawPowerup();
+  }
+
+  //after certain amount of time ghosts are not vulnerable anymore
   makeGhostsNotVulnerable(freezeFrame);
 
   //drawing food if food has not been eaten
-  for (int i = 0; i < CELLS_PER_ROW; i++) { 
-    for (int j = 0; j < CELLS_PER_ROW; j++) {
-      food[i][j].checkEaten(i, j);
-      food[i][j].drawFood();
-    }
+  for (int i = 0; i < food.size(); i++) { 
+      food.get(i).checkEaten(i);
+      food.get(i).drawFood();
   }
 
   //drawing and moving pacman
@@ -158,21 +187,26 @@ void draw() {
   pacman.pacmanMoves();
 
   //drawing and moving ghosts
-  for (int i = 0; i < ghosts.length; i++) { 
-    ghosts[i].drawGhost();
-    ghosts[i].ghostMoves();
+  for (int i = 0; i < ghosts.size(); i++) { 
+    ghosts.get(i).drawGhost(i);
+    ghosts.get(i).ghostMoves();
   }
 
   //ghosts change direction 5% of the time
-  if (random(1) < 0.05) { 
-    ghosts[(int)random(4)].ghostChangeDirection();
+  for (int i = 0; i < ghosts.size(); i++) { 
+    if (ghosts.get(i).currentDirection == "none" || random(1) < 0.05) {
+      ghosts.get(i).ghostChangeDirection();
+    }
+    if ((ghosts.get(i).xGrid == 9 || ghosts.get(i).xGrid == 10) && ghosts.get(i).yGrid == 10) {
+      ghosts.get(i).ghostChangeDirection("up");
+    }
   }
 
   scoring(); //updates score
 
   //checks for collision, instantiates new pacman if yes
-  if (checkCollision() == 1 && pacman.xPos != 50 && pacman.yPos != 60) { 
-    pacman = new Pacman(50, 60);
+  if (checkCollision() == 1 && (pacman.xGrid != 4 || pacman.yGrid != 4)) { 
+    pacman = new Pacman(4, 4);
     LIVES--;
   }
 
@@ -182,22 +216,22 @@ void draw() {
     background(0);
     textSize(50);
     fill(255);
-    text("YOU LOST", 300, 300);
-    text("BETTER LUCK NEXT TIME!", 130, 400);
+    text("YOU LOST", 200, 300);
+    text("BETTER LUCK\n NEXT TIME!", 130, 400);
     textSize(30);
-    text("SCORE: " + endScore, 315, 480);
+    text("SCORE: " + endScore, 245, 550);
     LIVES = 0;
-    ghosts[0].drawGhost();
+    ghosts.get(0).drawGhost(0);
   }
 
   //checking win condition (all food eaten and lives > 0) and loading end screen if true
   if (checkWin()) { 
     background(0);
-    ghosts[0].drawGhost();
-    textSize(50);
+    ghosts.get(1).drawGhost(1);
+    textSize(40);
     fill(255);
-    text("CONGRATULATIONS!", 150, 300);
-    text("YOU BEAT THE BLINKIES", 130, 400);
+    text("CONGRATULATIONS!", 100, 300);
+    text("YOU DEFEATED\n THE GHOSTS", 160, 400);
   }
 }
 
@@ -207,15 +241,12 @@ void draw() {
 //updates score based on number of food items eaten
 void scoring() {
   int counter = 0;
-  for (int i = 0; i < CELLS_PER_ROW; i++) {
-    for (int j = 0; j < CELLS_PER_ROW; j++) { 
-      if (food[i][j].eaten && !food[i][j].isFruit) {
+  for (int i = 0; i < food.size(); i++) {
+      if (food.get(i).eaten && !food.get(i).isFruit) {
         counter += 100;
-      }
-      else if (food[i][j].eaten) { //fruits are worth more
+      } else if (food.get(i).eaten) { //fruits are worth more
         counter += 400;
       }
-    }
   }
   SCORE = counter;
 }
@@ -223,12 +254,10 @@ void scoring() {
 //checks if all food has been eaten
 boolean checkWin() {
   boolean allEaten = true;
-  for (int i = 0; i < CELLS_PER_ROW; i++) {
-    for (int j = 0; j < CELLS_PER_ROW; j++) {
-      if (!food[i][j].eaten) {
+  for (int i = 0; i < food.size(); i++) {
+      if (!food.get(i).eaten) {
         allEaten = false;
       }
-    }
   }
   return allEaten;
 }
@@ -237,35 +266,36 @@ boolean checkWin() {
 //returns 0 for no collision, 1 for pacman eaten by ghost, 2 for ghost eaten by pacman
 int checkCollision() {
   int collided = 0;
-  for (int i = 0; i < ghosts.length; i++) {
-    if (dist(pacman.xPos, pacman.yPos, ghosts[i].xPos, ghosts[i].yPos) < 40 && ghosts[i].vulnerable == false) {
+  for (int i = 0; i < ghosts.size(); i++) {
+    if (pacman.xGrid == ghosts.get(i).xGrid && pacman.yGrid == ghosts.get(i).yGrid && ghosts.get(i).vulnerable == false) {
       collided = 1;
-    } else if (dist(pacman.xPos, pacman.yPos, ghosts[i].xPos, ghosts[i].yPos) < 40 && ghosts[i].vulnerable == true) {
-      ghosts[i] = new Ghost(random(340, 460), 360); //ghost "dies" and respawns 
+    } else if (pacman.xGrid == ghosts.get(i).xGrid && pacman.yGrid == ghosts.get(i).yGrid && ghosts.get(i).vulnerable == true) {
+      ghosts.remove(i); 
+      ghosts.add(new Ghost((int)random(8,12), 10)); //ghost "dies" and respawns
       SCORE += 400;
       collided = 2;
     }
   }
-  return collided;
+  return collided; 
 }
 
 //makes ghosts vulnerable to pacman
 int makeGhostsVulnerable() {
-  for (int i = 0; i < ghosts.length; i++) {
-    ghosts[i].vulnerable = true;
+  for (int i = 0; i < ghosts.size(); i++) {
+    ghosts.get(i).vulnerable = true;
   }
   return frameCount;
 }
 
 void makeGhostsNotVulnerable(int freezeFrame) {
-  if (frameCount - freezeFrame > 300) { //make vulnerable for 300 frames
-    for (int j = 0; j < ghosts.length; j++) {
-      ghosts[j].vulnerable = false;
+  if (frameCount - freezeFrame > 5*frameRate) { //make vulnerable for 5 seconds
+    for (int i = 0; i < ghosts.size(); i++) {
+      ghosts.get(i).vulnerable = false;
     }
   }
 }
 
-//allows the user to change Pac-Man's direction using arrow keys
+//allows the user to change Pac-Man's direction using arrow keys //refactor this with SerialEvent to match arduino
 void keyPressed() {
   if (keyCode == UP) {
     pacman.pacmanChangeDirection("up");

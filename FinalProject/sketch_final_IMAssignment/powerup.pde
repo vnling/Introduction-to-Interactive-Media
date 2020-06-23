@@ -1,28 +1,31 @@
 class Powerup {
-  float xPos;
-  float yPos;
+  int xGrid;
+  int yGrid;
+  int xPos;
+  int yPos;
   boolean eaten;
 
-  Powerup(float x, float y) {
-    xPos = x;
-    yPos = y;
+  Powerup(int x, int y) {
+    xGrid = x;
+    yGrid = y;
+    xPos = x + 20;
+    yPos = y + 20;
   }
-  
+
   void drawPowerup() {
     if (!eaten) {
-      circle(xPos, yPos, 20);
+      fill(255);
+      stroke(255);
+      circle(xGrid*GRID_SIZE + 20, yGrid*GRID_SIZE + 20, 20);
     }
   }
-  
+
   boolean checkEaten(int i) {
-    if (dist(pacman.xPos, pacman.yPos, powerup[i].xPos, powerup[i].yPos) <= 41 && 
-      powerup[i].xPos > pacman.xPos && powerup[i].yPos > pacman.yPos) 
+    if (pacman.xGrid == powerup.get(i).xGrid && pacman.yGrid == powerup.get(i).yGrid && !powerup.get(i).eaten) 
     {
-      powerup[i].eaten = true;
+      powerup.get(i).eaten = true;
       return true;
     }
     return false;
   }
-  
-
 }

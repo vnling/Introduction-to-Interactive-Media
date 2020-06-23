@@ -1,4 +1,6 @@
 class Food {
+  int xGrid;
+  int yGrid;
   float xPos;
   float yPos;
   boolean isFruit = false;
@@ -9,70 +11,60 @@ class Food {
   boolean isFruit5 = false;
   boolean isFruit6 = false;
   boolean eaten;
-  
+
   //constructor, one food item per grid square, all food begins as uneaten
   Food(int i, int j) {
+    xGrid = i;
+    yGrid = j;
     xPos = i*GRID_SIZE + 0.5*GRID_SIZE;
     yPos = j*GRID_SIZE + 0.5*GRID_SIZE;
     if (random(1) < 0.00125) {
       isFruit1 = true;
       isFruit = true;
-    }
-    else if (random(1) < 0.0025) {
+    } else if (random(1) < 0.0025) {
       isFruit2 = true;
       isFruit = true;
-    }
-    else if (random(1) < 0.00375) {
+    } else if (random(1) < 0.00375) {
       isFruit3 = true;
       isFruit = true;
-    }
-    else if (random(1) < 0.005) {
+    } else if (random(1) < 0.005) {
       isFruit4 = true;
       isFruit = true;
-    }
-    else if (random(1) < 0.00675) {
+    } else if (random(1) < 0.00675) {
       isFruit5 = true;
       isFruit = true;
-    }
-    else if (random(1) < 0.0075) {
+    } else if (random(1) < 0.0075) {
       isFruit6 = true;
       isFruit = true;
     }
     eaten = false;
   }
-  
+
   //only draw uneaten food
   void drawFood() {
     if (!eaten && !isFruit) {
-      circle(xPos, yPos, 4);
-    }
-    else if (!eaten && isFruit1) { //drawing fruits
-      image(fruit1, xPos, yPos, 30, 30);
-    }
-    else if (!eaten && isFruit2) {
-      image(fruit2, xPos, yPos, 30, 30);
-    }
-    else if (!eaten && isFruit3) {
-      image(fruit3, xPos, yPos, 30, 30);
-    }
-    else if (!eaten && isFruit4) {
-      image(fruit4, xPos, yPos, 30, 30);
-    }
-    else if (!eaten && isFruit5) {
-      image(fruit5, xPos, yPos, 30, 30);
-    }
-    else if (!eaten && isFruit6) {
-      image(fruit6, xPos, yPos, 30, 30);
+      fill(255);
+      circle(xGrid*GRID_SIZE + GRID_SIZE/2, yGrid*GRID_SIZE + GRID_SIZE/2, 4);
+    } else if (!eaten && isFruit1) { //drawing fruits
+      image(fruit1, xGrid*GRID_SIZE + 5, yGrid*GRID_SIZE + 5, 30, 30);
+    } else if (!eaten && isFruit2) {
+      image(fruit2, xGrid*GRID_SIZE + 5, yGrid*GRID_SIZE + 5, 30, 30);
+    } else if (!eaten && isFruit3) {
+      image(fruit3, xGrid*GRID_SIZE + 5, yGrid*GRID_SIZE + 5, 30, 30);
+    } else if (!eaten && isFruit4) {
+      image(fruit4, xGrid*GRID_SIZE + 5, yGrid*GRID_SIZE + 5, 30, 30);
+    } else if (!eaten && isFruit5) {
+      image(fruit5, xGrid*GRID_SIZE + 5, yGrid*GRID_SIZE + 5, 30, 30);
+    } else if (!eaten && isFruit6) {
+      image(fruit6, xGrid*GRID_SIZE + 5, yGrid*GRID_SIZE + 5, 30, 30);
     }
   }
-  
+
   //if distance between pacman and food is smaller than size of pacman + size of food, mark food as eaten
-  void checkEaten(int i, int j) {
-    if (dist(pacman.xPos, pacman.yPos, food[i][j].xPos, food[i][j].yPos) <= 41 && 
-      food[i][j].xPos > pacman.xPos && food[i][j].yPos > pacman.yPos) 
+  void checkEaten(int i) {
+    if (pacman.xGrid == food.get(i).xGrid && pacman.yGrid == food.get(i).yGrid) 
     {
-      food[i][j].eaten = true;
+      food.get(i).eaten = true;
     }
-     
   }
 }
