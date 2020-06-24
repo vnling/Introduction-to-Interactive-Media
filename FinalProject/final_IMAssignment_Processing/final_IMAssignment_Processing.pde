@@ -1,6 +1,6 @@
 /*
   Concept: My version of the famous arcade game Pac-Man. The player's aim is to eat all the food pellets
- while avoiding the ghosts. The player starts the game with three lives. Each collision with a ghost reduces the 
+ while avoiding the ghosts. The player starts the game with four lives. Each collision with a ghost reduces the 
  player's lives by one, and the Pac-Man sprite respawns near the center of the screen. Each food pellet consumed 
  gives the player a score increment of 100. Powerups, represented by large circles, make ghosts vulnerable to Pac-Man 
  for 5 seconds (and make Pac-Man invulnerable to the ghosts, allowing Pac-Man to "eat" the ghosts.) Each ghost "eaten" by 
