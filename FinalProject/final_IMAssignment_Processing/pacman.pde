@@ -1,22 +1,20 @@
 class Pacman {
   int xGrid;
   int yGrid;
-  int xPos;
-  int yPos;
   float xVel;
   float yVel;
   boolean allowMove;
+  boolean isDying;
   String currentDirection;
 
   //pacman initialized with given position and no movement
   Pacman(int x, int y) {
     xGrid = x;
     yGrid = y;
-    xPos = xGrid/GRID_SIZE;
-    yPos = yGrid/GRID_SIZE;
     xVel = 0;
     yVel = 0;
     allowMove = false;
+    isDying = false;
     currentDirection = "none";
   }
 
@@ -24,55 +22,56 @@ class Pacman {
   //inner if condition allows for animation based on the framecount
   void drawPacman() {
     if (xVel > 0) {
-      if (frameCount%12 < 4) {
+      if (frameCount%9 < 3) {
         image(pacman1, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+      } else if (frameCount%9 >= 3 && frameCount%9 < 6) {
         image(pacman2, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 8) {
+      } else if (frameCount%9 >= 6) {
         image(pacman3, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
       }
     } else if (xVel < 0) {
-      if (frameCount%12 < 4) {
+      if (frameCount%9 < 3) {
         image(pacman7, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+      } else if (frameCount%9 >= 3 && frameCount%9 < 6) {
         image(pacman8, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 8) {
+      } else if (frameCount%9 >= 6) {
         image(pacman9, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
       }
     } else if (yVel > 0) {
-      if (frameCount%12 < 4) {
+      if (frameCount%9 < 3) {
         image(pacman4, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+      } else if (frameCount%9 >= 3 && frameCount%9 < 6) {
         image(pacman5, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 8) {
+      } else if (frameCount%9 >= 6) {
         image(pacman6, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
       }
     } else if (yVel < 0) {
-      if (frameCount%12 < 4) {
+      if (frameCount%9 < 3) {
         image(pacman10, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+      } else if (frameCount%9 >= 3 && frameCount%9 < 6) {
         image(pacman11, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 8) {
+      } else if (frameCount%9 >= 6) {
         image(pacman12, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
       }
     } else {
-      if (frameCount%12 < 4) {
+      if (frameCount%9 < 3) {
         image(pacman1, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 4 && frameCount%12 < 8) {
+      } else if (frameCount%9 >= 3 && frameCount%9 < 6) {
         image(pacman2, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
-      } else if (frameCount%12 >= 8) {
+      } else if (frameCount%9 >= 6) {
         image(pacman3, xGrid*GRID_SIZE, yGrid*GRID_SIZE, 35, 35);
       }
     }
   }
 
-  //pacman bounces off the edge of the frame
   void pacmanMoves() {
+    //pacman can run offscreen and return from the other side at specific locations
     if (xGrid == 0 && yGrid == 10 && currentDirection == "left") {
       xGrid = 20;
     } else if (xGrid == 19 && yGrid == 10 && currentDirection == "right") {
       xGrid = 0;
     }
+    //cannot pass through walls, only move if not wall ahead
     if (currentDirection == "up" && yGrid-1 >= -1 && BLUEPRINT[yGrid-1][xGrid] != 'W') {
       allowMove = true;
     } else if ( currentDirection == "down" && yGrid+1 < CELLS_PER_ROW && BLUEPRINT[yGrid+1][xGrid] != 'W') {
@@ -82,6 +81,7 @@ class Pacman {
     } else if (currentDirection == "right" && xGrid+1 < CELLS_PER_ROW && BLUEPRINT[yGrid][xGrid+1] != 'W') {
       allowMove = true;
     }
+    //stop if wall ahead
     if (!allowMove) {
       currentDirection = "none";
     }
@@ -106,13 +106,13 @@ class Pacman {
       xVel = 0;
       yVel = 0;
     }
-
+    //actually moving
     xGrid += xVel;
     yGrid += yVel;
     allowMove = false;
   }
 
-  //pacman changes direction based on key input (from keyPressed())
+  //pacman changes direction based on switchInput (from arduino)
   void pacmanChangeDirection(String direction) {
     switch(direction) {
     case "up":

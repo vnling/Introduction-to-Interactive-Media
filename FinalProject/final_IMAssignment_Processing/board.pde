@@ -1,3 +1,4 @@
+//2D array,  used to construct game in setup() 
 char[][] BLUEPRINT = {
   {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'}, 
   {'W', 'P', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'W', 'W', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'P', 'W'}, 
@@ -24,19 +25,16 @@ char[][] BLUEPRINT = {
 class Wall {
   int xGrid;
   int yGrid;
-  int xPos;
-  int yPos;
 
   Wall(int x, int y) {
     xGrid = x;
     yGrid = y;
-    xPos = x*GRID_SIZE;
-    yPos = y*GRID_SIZE;
   }
 
+  //walls drawn as solid blue squares
   void drawWall() {
-    fill(50, 66, 168);
-    stroke(50, 66, 168);
-    square(xPos, yPos, GRID_SIZE);
+    fill(33, 33, 222);
+    stroke(33, 33, 222);
+    square(xGrid*GRID_SIZE, yGrid*GRID_SIZE, GRID_SIZE);
   }
 }

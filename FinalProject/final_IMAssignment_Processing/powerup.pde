@@ -1,15 +1,11 @@
 class Powerup {
   int xGrid;
   int yGrid;
-  int xPos;
-  int yPos;
   boolean eaten;
 
   Powerup(int x, int y) {
     xGrid = x;
     yGrid = y;
-    xPos = x + 20;
-    yPos = y + 20;
   }
 
   void drawPowerup() {
@@ -20,6 +16,7 @@ class Powerup {
     }
   }
 
+  //if in same x and y location, powerup is eaten, powers conferred in gameLoop()
   boolean checkEaten(int i) {
     if (pacman.xGrid == powerup.get(i).xGrid && pacman.yGrid == powerup.get(i).yGrid && !powerup.get(i).eaten) 
     {

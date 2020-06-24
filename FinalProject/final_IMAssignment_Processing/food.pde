@@ -1,9 +1,9 @@
 class Food {
   int xGrid;
   int yGrid;
-  float xPos;
-  float yPos;
+  //checks if is fruit
   boolean isFruit = false;
+  //checks if is specific fruit (to help with drawing)
   boolean isFruit1 = false;
   boolean isFruit2 = false;
   boolean isFruit3 = false;
@@ -16,9 +16,7 @@ class Food {
   Food(int i, int j) {
     xGrid = i;
     yGrid = j;
-    xPos = i*GRID_SIZE + 0.5*GRID_SIZE;
-    yPos = j*GRID_SIZE + 0.5*GRID_SIZE;
-    if (random(1) < 0.00125) {
+    if (random(1) < 0.00125) { //initialize fruits 0.75% of the time
       isFruit1 = true;
       isFruit = true;
     } else if (random(1) < 0.0025) {
@@ -60,7 +58,7 @@ class Food {
     }
   }
 
-  //if distance between pacman and food is smaller than size of pacman + size of food, mark food as eaten
+  //if pacman and food are in the same x and y location, mark food as eaten
   void checkEaten(int i) {
     if (pacman.xGrid == food.get(i).xGrid && pacman.yGrid == food.get(i).yGrid) 
     {

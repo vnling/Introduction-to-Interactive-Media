@@ -83,17 +83,19 @@ PImage pacman10;
 PImage pacman11;
 PImage pacman12;
 
+//initializing fonts
 PFont crackman, pressStart;
 
-//setting the number of lives and the player's score as global variables
-int LIVES = 4;
-int SCORE = 0;
-int freezeFrame;
-String gameLevel;
-boolean gameHasStarted = false;
+//setting global variables
+int LIVES = 4; //number of lives
+int SCORE = 0; //player's score
+int freezeFrame; //used as a reference to make ghosts vulnerable for 5 seconds
+String gameLevel; //used to toggle game difficulty
+boolean gameHasStarted = false; //state variables
+boolean gameOver = false;
 
 //initializing the pacman, ghost, and food instances
-//pacman is created in the top left corner
+//pacman is created in the middle of the screen
 Pacman pacman = new Pacman(10, 12);
 ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
 ArrayList<Powerup> powerup = new ArrayList<Powerup>();
@@ -106,8 +108,9 @@ ArrayList<Wall> walls = new ArrayList<Wall>();
 
 void setup() {
   size(800, 850);
-  frameRate(8);
+  frameRate(8); //chosen for best experience
 
+  //serial port setup
   myPort = new Serial(this, Serial.list()[0], 9600);
   myPort.bufferUntil('\n');
 
@@ -116,6 +119,7 @@ void setup() {
   player = minim.loadFile("pacman.mp3");
   player.loop();
 
+  //creating walls, food, powerups, and ghosts based on BLUEPRINT (in board.pde file)
   for (int i = 0; i < BLUEPRINT.length; i++) {
     for (int j = 0; j < BLUEPRINT[i].length; j++) {
       //wall
@@ -172,9 +176,7 @@ void setup() {
   pacman12 = loadImage("pacman12.png");
 
   //loading fonts
-
   crackman = createFont("crackman.regular.ttf", 50);
-
   pressStart = createFont("PressStart2P.ttf", 50);
   textFont(pressStart);
 }
@@ -185,10 +187,13 @@ void setup() {
 
 void draw() {
 
+  //all functions in game.pde
   if (!gameHasStarted) {
-    preGame();
+    preGame(); //show starting screen if game has not started
+  } else if (!gameOver) {
+    gameLoop(); //show game if game is not over
   } else {
-    gameLoop();
+    gameOver(); //post-game processing, allowing for restart
   }
 }
 
@@ -200,10 +205,10 @@ void serialEvent(Serial myPort) {
   String inString = myPort.readStringUntil('\n');
 
   if (inString != null) {
-    inString = trim(inString);
+    inString = trim(inString); 
     int inputs[] = int(split(inString, ','));
-    switchInput = inputs[0];
-    potInput = inputs[1];
+    switchInput = inputs[0]; //first input (switches) is direction
+    potInput = inputs[1]; //second input (potentiometer) used to change levels
   }
 }
 
@@ -224,7 +229,7 @@ void scoring() {
   SCORE = counter;
 }
 
-//checks if all food has been eaten
+//checks if all food has been eaten (and player has won)
 boolean checkWin() {
   boolean allEaten = true;
   for (int i = 0; i < food.size(); i++) {
@@ -246,7 +251,7 @@ int checkCollision() {
       ghosts.remove(i); 
       ghosts.add(new Ghost((int)random(8, 12), 10)); //ghost "dies" and respawns
       SCORE += 400;
-      collided = 2;
+      collided = 2; //not strictly necessary but I needed to return something
     }
   }
   return collided;

@@ -5,7 +5,7 @@ const int green = A3;
 const int pot = A4;
 
 void setup() {
-  // put your setup code here, to run once:
+  //setting up serial and pins - four switches, one potentiometer
   Serial.begin(9600);
   pinMode(red, INPUT);
   pinMode(yellow, INPUT);
@@ -15,9 +15,12 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // reading from potentiometer
   int potRead = analogRead(pot);
+  //mapping to between 0 and 4 (because 5 game levels)
   potRead = map(potRead, 0, 1023, 0, 4);
+
+  //printing (switchInput,potInput)
   if (digitalRead(red) == HIGH) {
     Serial.print(1);
     Serial.print(",");

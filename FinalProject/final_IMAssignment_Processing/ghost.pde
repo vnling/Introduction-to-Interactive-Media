@@ -1,8 +1,6 @@
 class Ghost {
   int xGrid;
   int yGrid;
-  float xPos;
-  float yPos;
   float xVel;
   float yVel;
   boolean vulnerable;
@@ -13,14 +11,13 @@ class Ghost {
   Ghost(int x, int y) {
     xGrid = x;
     yGrid = y;
-    xPos = x;
-    yPos = y;
     xVel = 0;
     yVel = 0;
     vulnerable = false;
   }
 
-  //drawing the ghosts by loading different images based on the directions they are going in
+  //drawing the ghosts by loading different images based on the directions they are going in 
+  //and which index in the arrayList they are
   void drawGhost(int i) {
     //if scared
     if (vulnerable) {
@@ -86,8 +83,9 @@ class Ghost {
     }
   }
 
-  //ghosts should bounce off the side of the frame when they hit it
+  //ghosts should stop when hitting obstacles
   void ghostMoves() {
+    //checks if wall is ahead
     if (currentDirection == "up" && yGrid-1 >= 0 && BLUEPRINT[yGrid-1][xGrid] != 'W') {
       allowMove = true;
     } else if ( currentDirection == "down" && yGrid+1 < CELLS_PER_ROW && BLUEPRINT[yGrid+1][xGrid] != 'W') {
@@ -97,9 +95,11 @@ class Ghost {
     } else if (currentDirection == "right" && xGrid+1 < CELLS_PER_ROW && BLUEPRINT[yGrid][xGrid+1] != 'W') {
       allowMove = true;
     }
+    //if wall is ahead then stop
     if (!allowMove) {
       currentDirection = "none";
     }
+    //otherwise allow movement
     switch(currentDirection) {
     case "up":
       xVel = 0;
@@ -121,6 +121,7 @@ class Ghost {
       xVel = 0;
       yVel = 0;
     }
+    //actually moving ghosts
     xGrid += xVel;
     yGrid += yVel;
     allowMove = false;
@@ -145,6 +146,8 @@ class Ghost {
     }
   }
 
+  //overloaded function allows me to hard code ghost directions sometimes
+  //created to help ghosts escape "cage" where they spawn
   void ghostChangeDirection(String direction) {
     switch(direction) {
     case "up":
