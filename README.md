@@ -1,3 +1,2 @@
 # Introduction-to-Interactive-Media
-
-My work for Intro to IM Summer 2020!
+Coursework for Intro to IM Summer 2020.
